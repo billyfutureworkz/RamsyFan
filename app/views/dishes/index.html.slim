@@ -1,0 +1,21 @@
+h1 Listing dishes
+
+table
+  thead
+    tr
+      th Title
+      th Description
+      th Cost
+      th Pax
+      th Vegatarian
+      th Created Date
+
+  tbody
+    - @dishes.each do |dish|
+      tr
+        td = dish.title
+        td = dish.description
+        td = dish.cost
+        td = dish.pax
+        td = dish.vegetarian
+        td = dish.created_at
