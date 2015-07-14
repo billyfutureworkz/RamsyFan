@@ -1,6 +1,6 @@
 h1 Listing dishes
 
-table
+table.table.table-striped
   thead
     tr
       th Title
@@ -19,3 +19,7 @@ table
         td = dish.pax
         td = dish.vegetarian
         td = dish.created_at
+        td = link_to 'Show', dish_path(dish), :class => 'btn btn-primary'
+      tr
+
+     
