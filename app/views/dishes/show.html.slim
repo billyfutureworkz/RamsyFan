@@ -1,16 +1,17 @@
-.col-sm-6
-  h1 dish information
+.container
+  .col-sm-6
+    h1 dish information
 
-  p
-    strong> Title: 
-    = @dish.title
-  p
-    strong> Description:
-    = @dish.description  
-  p
-    strong> Cost:
-    =  @dish.cost 
-    
-  p
-    strong> Pax:
-    = @dish.pax   
+    p
+      strong> Title: 
+      = @dish.title
+    p
+      strong> Description:
+      = @dish.description  
+    p
+      strong> Cost:
+      = number_to_currency(@dish.cost, :separator => ",", :delimiter => ".")
+      
+    p
+      strong> Pax:
+      = @dish.pax   
