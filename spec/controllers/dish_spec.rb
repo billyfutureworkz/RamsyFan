@@ -11,4 +11,13 @@ RSpec.describe DishesController, type: :controller do
       end
     end
   end
+
+  describe '#show' do
+    let!(:dish) { FactoryGirl.create(:dish) }
+
+    it 'should find a dish for view' do
+      get :show, id: dish.id
+      expect(assigns(:dish)).to eq dish
+    end
+  end
 end
