@@ -1,12 +1,16 @@
-h1 dish information
+.col-sm-6
+  h1 dish information
 
-table.table.table-striped
-  tbody
-      tr
-        td = @dish.title
-        td = @dish.description
-        td = @dish.cost
-        td = @dish.pax
-        td = @dish.vegetarian
-        td = @dish.created_at
-      tr    
+  p
+    strong> Title: 
+    = @dish.title
+  p
+    strong> Description:
+    = @dish.description  
+  p
+    strong> Cost:
+    =  @dish.cost 
+    
+  p
+    strong> Pax:
+    = @dish.pax   
