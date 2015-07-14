@@ -1,7 +1,8 @@
 class DishesController < ApplicationController
 
   def index
-    @dishes = Dish.all
+    @q = Dish.ransack(params[:q])
+    @dishes = @q.result(distinct: true)
   end
 
   def show
