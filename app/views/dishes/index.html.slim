@@ -2,7 +2,7 @@
   h1 Listing dishes
   .row
     = search_form_for @q do |f|
-      = f.search_field :title_cont, :placeholder => "search title", :class => "form-control", :style => 'display:inline; width: 200px;'
+      = f.search_field :title_or_description_cont, :placeholder => "search title or description", :class => "form-control", :style => 'display:inline; width: 200px;'
       = f.submit :class => 'btn btn-primary btn-sm'
 
     table class="table table-striped"
