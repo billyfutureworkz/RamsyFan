@@ -1,29 +1,31 @@
-h1 Listing dishes
+.container
+  h1 Listing dishes
+  .row
+    = search_form_for @q do |f|
+      = f.search_field :title_cont, :placeholder => "search title", :class => "form-control", :style => 'display:inline; width: 200px;'
+      = f.submit :class => 'btn btn-primary btn-sm'
 
-= search_form_for @q do |f|
-  = f.search_field :title_cont, :placeholder => "search title", :class => "form-control", :style => 'display:inline; width: 200px;'
-  = f.submit :class => 'btn btn-primary btn-sm'
+    table class="table table-striped"
+      thead
+        tr
+          th Title
+          th Description
+          th Cost
+          th Pax
+          th Vegatarian
+          th Created Date
+          th Actions
 
-table class="table table-striped"
-  thead
-    tr
-      th Title
-      th Description
-      th Cost
-      th Pax
-      th Vegatarian
-      th Created Date
-
-  tbody
-    - @dishes.each do |dish|
-      tr
-        td = dish.title
-        td = dish.description
-        td = number_to_currency(dish.cost, :separator => ",", :delimiter => ".")
-        td = dish.pax
-        td = dish.vegetarian
-        td = dish.created_at.strftime("%m-%d-%Y")
-        td = link_to 'Show', dish_path(dish), :class => 'btn btn-primary'
-      tr
-
-     
+      tbody
+        .col-sm-3
+        - @dishes.each do |dish|
+          tr
+            td = dish.title
+            td = dish.description
+            td = number_to_currency(dish.cost, :separator => ",", :delimiter => ".")
+            td = dish.pax
+            td 
+              i class=(dish.vegetarian ? 'fa fa-check' : 'fa fa-times')
+            td = dish.created_at.strftime("%m-%d-%Y")
+            td = link_to 'Show', dish_path(dish), :class => 'btn btn-primary'
+          tr
