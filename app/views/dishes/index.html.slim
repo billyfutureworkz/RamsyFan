@@ -22,7 +22,7 @@
           tr
             td = dish.title
             td = dish.description
-            td = number_to_currency(dish.cost, :separator => ",", :delimiter => ".")
+            td = number_to_currency(dish.cost, :separator => ".", :delimiter => ",")
             td = dish.pax
             td 
               i class=(dish.vegetarian ? 'fa fa-check' : 'fa fa-times')
