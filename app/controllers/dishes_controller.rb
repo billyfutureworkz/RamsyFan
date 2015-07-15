@@ -1,7 +1,7 @@
 class DishesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
   before_filter :set_dish, :only => [:edit, :update]
-
+  
   def index
     @q = Dish.ransack(params[:q])
     @dishes = @q.result
@@ -21,10 +21,8 @@ class DishesController < ApplicationController
     respond_to do |format|
       if @dish.save
         format.html { redirect_to @dish, notice: 'Dish was successfully created.' }
-        format.json { render :show, status: :created, location: @dish }
       else
         format.html { render :new }
-        format.json { render json: @dish.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -35,10 +33,8 @@ class DishesController < ApplicationController
     respond_to do |format|
       if @dish.update(dish_params)
         format.html { redirect_to @dish, notice: 'Dish was successfully updated.' }
-        format.json { render :show, status: :ok, location: @dish }
       else
         format.html { render :edit }
-        format.json { render json: @dish.errors, status: :unprocessable_entity }
       end
     end
   end

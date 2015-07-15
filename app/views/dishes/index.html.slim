@@ -27,4 +27,5 @@
               i class=(dish.vegetarian ? 'fa fa-check' : 'fa fa-times')
             td = dish.created_at.strftime("%m-%d-%Y")
             td = link_to 'Show', dish_path(dish), :class => 'btn btn-primary'
+            td = link_to 'Edit', edit_dish_path(dish), :class => 'btn btn-success' if can? :update, dish
           tr
