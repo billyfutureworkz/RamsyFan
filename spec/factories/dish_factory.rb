@@ -5,6 +5,7 @@ FactoryGirl.define do
     cost          5
     pax           2
     vegetarian    false
+    user
   end
 
   # factory :invalid_dish do

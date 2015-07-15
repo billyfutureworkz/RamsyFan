@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'cancancan', '~> 1.10'
 gem "font-awesome-rails"
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
@@ -54,3 +53,4 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
+gem 'database_cleaner', '~> 1.4.1', group: :test

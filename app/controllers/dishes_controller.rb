@@ -1,15 +1,15 @@
 class DishesController < ApplicationController
-  before_action :set_dish, only: [:show, :edit, :update]
-  before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
-
-  # load_and_authorize_resource
+  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :set_dish, :only => [:edit, :update]
 
   def index
     @q = Dish.ransack(params[:q])
     @dishes = @q.result
   end
 
-  def show; end
+  def show
+    @dish = Dish.find(params.require(:id))
+  end
   
   def new
     @dish = Dish.new
@@ -44,11 +44,15 @@ class DishesController < ApplicationController
   end
 
   private
-    def set_dish
-      @dish = Dish.find(params.require(:id))
+    def dish_params
+      params.require(:dish).permit(:title, :description, :cost, :pax, :vegetarian, :user_id)
     end
 
-    def dish_params
-      params.require(:dish).permit(:title, :description, :cost, :pax, :vegetarian)
+    def set_dish
+      @dish = current_user.dishes.find(params.require(:id))
+    end
+
+    def record_not_found
+      render plain: "404 Not Found", status: 404
     end
 end

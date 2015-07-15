@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe DishesController, type: :controller do
+
+  def setup
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    sign_in FactoryGirl.create(:user)
+  end
+
   describe '#index' do
     context 'Listing of dishes' do
       let!(:dishes) { FactoryGirl.create_list(:dish, 2) }    
@@ -39,6 +45,7 @@ RSpec.describe DishesController, type: :controller do
   
   describe '#new' do
     it 'should instantiate a dish for view' do
+      setup
       get :new
       expect(assigns(:dish)).to be_a Dish
     end
@@ -47,12 +54,14 @@ RSpec.describe DishesController, type: :controller do
   describe  '#create' do 
     context "with valid attributes" do
       it "creates a new dish" do
+        setup
         expect{
           post :create, dish: FactoryGirl.attributes_for(:dish)
         }.to change(Dish, :count).by(1)
       end
 
       it "redirects to the new dish" do
+        setup
         post :create, dish: FactoryGirl.attributes_for(:dish)
         response.should redirect_to Dish.last
       end
@@ -80,6 +89,7 @@ RSpec.describe DishesController, type: :controller do
     let!(:dish) { FactoryGirl.create(:dish) }
 
     it 'should find the dish to edit' do
+      setup
       do_request
       expect(assigns(:dish)).to eq dish
     end
@@ -90,13 +100,14 @@ RSpec.describe DishesController, type: :controller do
       put :update, id: dish.id, dish: updated_params
     end
 
-    let!(:dish)        { FactoryGirl.create(:dish, title: 'old food') }
+    let!(:dish)           { FactoryGirl.create(:dish, title: 'old food') }
     let!(:updated_params) {FactoryGirl.attributes_for(:dish, title: new_title) }
 
     context 'Success' do    
       let!(:new_title) { 'new food' }
       
       it 'should update the dish' do
+        setup
         do_request
         expect(assigns(:dish).title).to eq new_title
       end
@@ -106,6 +117,7 @@ RSpec.describe DishesController, type: :controller do
       let!(:new_title) { '' }
       
       it 'should not update the dish' do
+        setup
         do_request
         expect(dish.reload.title).to eq 'old food'
       end
