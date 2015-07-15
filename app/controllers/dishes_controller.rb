@@ -1,19 +1,22 @@
 class DishesController < ApplicationController
+  before_action :set_dish, only: [:show, :edit, :update]
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
+
+  # load_and_authorize_resource
+
   def index
     @q = Dish.ransack(params[:q])
     @dishes = @q.result
   end
 
-  def show
-    @dish  = Dish.find(dish_id)
-  end
+  def show; end
   
   def new
     @dish = Dish.new
   end
 
   def create
-    @dish = Dish.new(dish_params)
+    @dish = current_user.dishes.new(dish_params)
 
     respond_to do |format|
       if @dish.save
@@ -26,9 +29,23 @@ class DishesController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    respond_to do |format|
+      if @dish.update(dish_params)
+        format.html { redirect_to @dish, notice: 'Dish was successfully updated.' }
+        format.json { render :show, status: :ok, location: @dish }
+      else
+        format.html { render :edit }
+        format.json { render json: @dish.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
-    def dish_id
-      params.require(:id)
+    def set_dish
+      @dish = Dish.find(params.require(:id))
     end
 
     def dish_params

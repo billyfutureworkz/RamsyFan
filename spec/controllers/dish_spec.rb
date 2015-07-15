@@ -71,5 +71,46 @@ RSpec.describe DishesController, type: :controller do
     #   end
     # end 
   end
+
+  describe '#edit' do
+    def do_request
+      get :edit, id: dish.id
+    end
+
+    let!(:dish) { FactoryGirl.create(:dish) }
+
+    it 'should find the dish to edit' do
+      do_request
+      expect(assigns(:dish)).to eq dish
+    end
+  end
+
+  describe '#update' do
+    def do_request
+      put :update, id: dish.id, dish: updated_params
+    end
+
+    let!(:dish)        { FactoryGirl.create(:dish, title: 'old food') }
+    let!(:updated_params) {FactoryGirl.attributes_for(:dish, title: new_title) }
+
+    context 'Success' do    
+      let!(:new_title) { 'new food' }
+      
+      it 'should update the dish' do
+        do_request
+        expect(assigns(:dish).title).to eq new_title
+      end
+    end
+
+    context 'Failure' do      
+      let!(:new_title) { '' }
+      
+      it 'should not update the dish' do
+        do_request
+        expect(dish.reload.title).to eq 'old food'
+      end
+
+    end
+  end
   
 end
