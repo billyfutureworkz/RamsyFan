@@ -5,6 +5,7 @@ gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem "slim-rails"
 gem 'formtastic', '~> 3.0'
+gem 'formtastic-bootstrap'
 gem 'devise'
 gem 'pg'
 gem 'rails_12factor', group: :production

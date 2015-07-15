@@ -1,0 +1,7 @@
+= semantic_form_for @dish do |f|
+  = f.input :title
+  = f.input :description
+  = f.input :cost
+  = f.input :pax
+  = f.input :vegetarian, label: false
+  = f.action :submit, :as => :button
