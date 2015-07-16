@@ -48,7 +48,7 @@ class DishesController < ApplicationController
     @dish.update_attributes(:published => 1)
 
     respond_to do |format|
-      format.html { redirect_to my_dishes_dishes_url, notice: 'Dish was publised successfully.' }
+      format.html { redirect_to my_dishes_dishes_url, notice: 'Dish was publishsed successfully.' }
     end 
   end
 
@@ -57,7 +57,7 @@ class DishesController < ApplicationController
     @dish.update_attributes(:published => 0)
 
     respond_to do |format|
-      format.html { redirect_to my_dishes_dishes_url, notice: 'Dish was unpublised successfully.' }
+      format.html { redirect_to my_dishes_dishes_url, notice: 'Dish was unpublished successfully.' }
     end
   end
 
