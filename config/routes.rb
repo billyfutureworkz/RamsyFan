@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :dishes , only: [:index, :show, :new, :create, :edit, :update] do 
     member do
       post 'published'

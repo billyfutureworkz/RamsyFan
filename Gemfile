@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'enumerize'
+gem 'rails_admin', '~> 0.6.8'
 gem 'cancancan', '~> 1.10'
 gem "font-awesome-rails"
 gem 'ransack', github: 'activerecord-hackery/ransack'
