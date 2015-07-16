@@ -3,7 +3,7 @@ class DishesController < ApplicationController
   before_filter :set_dish, :only => [:edit, :update]
   
   def index
-    @q = Dish.published.ransack(params[:q])
+    @q = Dish.published_and_approved.ransack(params[:q])
     @dishes = @q.result
   end
 
