@@ -27,5 +27,6 @@ html
           = link_to "sign in", new_user_session_path 
       br  
         = link_to 'Create new dish', new_dish_path, :class => 'btn btn-primary' if current_user
-
+        |.
+        = link_to 'My dishes', my_dishes_dishes_path, :class => 'btn btn-warning' if current_user
       = yield

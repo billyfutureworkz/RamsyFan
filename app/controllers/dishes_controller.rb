@@ -3,7 +3,7 @@ class DishesController < ApplicationController
   before_filter :set_dish, :only => [:edit, :update]
   
   def index
-    @q = Dish.ransack(params[:q])
+    @q = Dish.published.ransack(params[:q])
     @dishes = @q.result
   end
 
@@ -36,6 +36,28 @@ class DishesController < ApplicationController
       else
         format.html { render :edit }
       end
+    end
+  end
+
+  def my_dishes
+    @dishes = current_user.dishes.all
+  end
+
+  def published
+    @dish = Dish.find(params.require(:id))
+    @dish.update_attributes(:published => 1)
+
+    respond_to do |format|
+      format.html { redirect_to my_dishes_dishes_url, notice: 'Dish was publised successfully.' }
+    end 
+  end
+
+  def un_published
+    @dish = Dish.find(params.require(:id))
+    @dish.update_attributes(:published => 0)
+
+    respond_to do |format|
+      format.html { redirect_to my_dishes_dishes_url, notice: 'Dish was unpublised successfully.' }
     end
   end
 

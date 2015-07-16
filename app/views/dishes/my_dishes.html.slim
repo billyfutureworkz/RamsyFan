@@ -1,0 +1,39 @@
+.container
+    table class="table table-striped"
+      thead
+        tr
+          th Title
+          th Description
+          th Cost
+          th Pax
+          th Vegetarian
+          th Created Date
+          th 
+
+      tbody
+        .col-sm-3
+        - @dishes.each do |dish|
+          tr
+            td = dish.title
+            td = dish.description
+            td = number_to_currency(dish.cost, :separator => ".", :delimiter => ",")
+            td = dish.pax
+            td 
+              i class=(dish.vegetarian ? 'fa fa-check' : 'fa fa-times')
+            td = dish.created_at.strftime("%m-%d-%Y")
+            td 
+              .dropdown
+                button#dropdownMenu1.btn.btn-default.dropdown-toggle[type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"]
+                  |  Actions 
+                  span.caret
+                ul.dropdown-menu[aria-labelledby="dropdownMenu1"]
+                  li
+                    = link_to 'Edit', edit_dish_path(dish), :class => 'btn btn-success' if can? :update, dish 
+                  |. 
+                  li
+                    = button_to 'Published', published_dish_path(dish), :class => 'btn btn-default', :style => 'width:160px;'
+                  |.
+                  li
+                    = button_to 'Un published', un_published_dish_path(dish), :class => 'btn btn-danger', :style => 'width:160px;'
+
+    = link_to 'Back', dishes_path, :class => 'btn btn-default'

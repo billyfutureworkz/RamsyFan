@@ -124,5 +124,16 @@ RSpec.describe DishesController, type: :controller do
 
     end
   end
+
+  describe '#my_dishes' do 
+    context 'Listing of my dishes' do
+      let!(:dishes) { FactoryGirl.create_list(:dish, 2) }    
+
+      it 'should have a list of dishes' do
+        get :index
+        expect(assigns(:dishes).length).to eq 2
+      end
+    end
+  end
   
 end
